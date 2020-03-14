@@ -36,6 +36,9 @@ vector<int> kmp(string M, string N){
 	return ret;
 }
 
+//t에서 p가 몇번 나오는지 개수 : ans.size()
+//t에서 p가 나오는 위치 : ans[i]
+
 int main(){
 	string t,p;
 	getline(cin,t);
