@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 
-
 using namespace std;
 
 int v,e,v_cnt=1,s_cnt=1;
@@ -49,7 +48,7 @@ int main(){
 		int b_m=(b>0);
 		a=abs(a)*2;
 		b=abs(b)*2;
-
+		// a or b
 		if(a_m && b_m){
 			tree[nega(a)].push_back(b);
 			tree[nega(b)].push_back(a);
@@ -69,6 +68,7 @@ int main(){
 			tree[b].push_back(nega(a));
 		}
 	}
+	//정점개수*2 만큼
 	for(int i=1;i<2*v+1;i++)
 		if(!dist[i])
 			scc(i);
