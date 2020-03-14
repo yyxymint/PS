@@ -32,6 +32,9 @@ int BM(){
 	return size;
 }
 
+//왼쪽 정점들의 크기 n, 오른쪽 m
+//0번~n번이 0번~m번으로 최대매칭
+
 int main(){
 	int q;
 	scanf("%d%d",&n,&q);
