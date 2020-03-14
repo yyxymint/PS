@@ -59,13 +59,10 @@ struct MCMF {
                 edge[par[i]][paridx[i]].c -= flow;
                 edge[i][edge[par[i]][paridx[i]].rev].c += flow;
                 ret += (flow * edge[par[i]][paridx[i]].d);
-		        // printf("%d!!\n",ret);
             }
             tf += flow;
-            // ans=min(ans,left_block*(cost+3) + ret);
         }
         return make_pair(ret,tf);
-        // return make_pair(ans,ss);
     }
 };
 
@@ -81,7 +78,7 @@ int main(){
 	}
 	mcmf.add_edge(S,1,2,0);
 	mcmf.add_edge(v,E,2,0);
-
+	//first는 비용 second
 	pair<int,int> sss=mcmf.solve(S,E);
 	printf("%d\n",sss.first);
 
