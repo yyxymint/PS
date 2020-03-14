@@ -32,8 +32,11 @@ int main(){
 		int A,B,C;
 		scanf("%d %d %d",&A,&B,&C);
 		adj[A].push_back(make_pair(B,C));
+		//A에서 B로 비용 C
 	}
 	vector<int> dist = BF(1);
 	if(!dist.size()) return !printf("-1");
 	for(int i=2;i<V+1;i++) printf("%d\n",dist[i]!=987654321?dist[i]:-1);
+	//음수 사이클이 존재해서 무한히 감소 가능하면 INF
+
 }
