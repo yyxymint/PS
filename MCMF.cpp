@@ -78,7 +78,7 @@ int main(){
 	}
 	mcmf.add_edge(S,1,2,0);
 	mcmf.add_edge(v,E,2,0);
-	//first는 비용 second
+	//first는 비용 second는 유량
 	pair<int,int> sss=mcmf.solve(S,E);
 	printf("%d\n",sss.first);
 
