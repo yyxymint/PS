@@ -4,14 +4,14 @@
 
 using namespace std;
 
-int n,m;
+int MAXN=50005;
 
-vector<vector<pair<int,int> > > adj(1001);
+vector<vector<pair<int,int> > > adj(MAXN);
 
 vector<int> djk(int start){
 	priority_queue<pair<int,int> ,vector<pair<int,int> >,greater<pair<int,int> > > pq;
 	pq.push(make_pair(0,start));
-	vector<int> dist(n+1,INF);
+	vector<int> dist(MAXN+1,INF);
 	while(pq.size()){
 		int cost=pq.top().first;
 		int here=pq.top().second;
@@ -29,12 +29,15 @@ vector<int> djk(int start){
 	return dist;
 }
 
+int n,m;
+
 int main(){
 	scanf("%d%d",&n,&m);
 	while(m--){
 		int from,to,cost;
 		scanf("%d%d%d",&from,&to,&cost);
 		adj[from].push_back(make_pair(to,cost));
+		adj[to].push_back(make_pair(from,cost));
 	}
 	int start,dest;
 	scanf("%d%d",&start,&dest);
