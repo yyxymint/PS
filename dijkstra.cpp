@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int MAXN=50005;
+int MAXN=1005;
 
 vector<vector<pair<int,int> > > adj(MAXN);
 
@@ -37,7 +37,6 @@ int main(){
 		int from,to,cost;
 		scanf("%d%d%d",&from,&to,&cost);
 		adj[from].push_back(make_pair(to,cost));
-		adj[to].push_back(make_pair(from,cost));
 	}
 	int start,dest;
 	scanf("%d%d",&start,&dest);
