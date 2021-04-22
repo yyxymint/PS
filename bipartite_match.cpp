@@ -5,7 +5,7 @@ using namespace std;
 vector<vector<int> > adj(105);
 int aMatch[105],bMatch[105];
 int visited[105];
-int n,m;	
+int left_nodes,right_nodes;	
 
 int dfs(int a){
 	if(visited[a]) return 0;
@@ -23,22 +23,22 @@ int dfs(int a){
 
 int BM(){
 	int size=0;
-	for(int i=0;i<n;i++) aMatch[i]=-1;
-	for(int i=0;i<m;i++) bMatch[i]=-1;
-	for(int i=0;i<n;i++){
-		for(int j=0;j<n;j++) visited[j]=0;
+	for(int i=0;i<left_nodes;i++) aMatch[i]=-1;
+	for(int i=0;i<right_nodes;i++) bMatch[i]=-1;
+	for(int i=0;i<left_nodes;i++){
+		for(int j=0;j<left_nodes;j++) visited[j]=0;
 		if(dfs(i)) size++; 
 	}
 	return size;
 }
 
-//왼쪽 정점들의 크기 n, 오른쪽 m
-//0번~n번이 0번~m번으로 최대매칭
+//왼쪽 정점들의 크기 left_nodes, 오른쪽 right_nodes
+//0번~left_nodes번이 0번~right_nodes번으로 최대매칭
 
 int main(){
 	int q;
-	scanf("%d%d",&n,&q);
-	m=n;
+	scanf("%d%d",&left_nodes,&q);
+	right_nodes=left_nodes;
 	while(q--){
 		int a,b;
 		scanf("%d%d",&a,&b);
