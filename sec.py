@@ -84,8 +84,8 @@ def poly_calculator(f,g,p=[1,0,0,0,1,1,0,1,1],view=True):
                 modulo[check_pos + xor_pos] = modulo[check_pos + xor_pos]^p[xor_pos]
             if view:
                 print('modulo is equivalent to '+list_to_poly(reverse_list(modulo)))
-    if not view:
-        return modulo[-8:]
+        
+    return modulo[-8:]
     
 
 def inverse_finder(A_i, divider=[1,0,0,0,1,1,0,1,1],view=True):
@@ -241,3 +241,118 @@ def sbox(input_hex,divider=[1,0,0,0,1,1,0,1,1]):
     B_i = gf_matrix(reverse_list(B_i_prime))
     print('It is equivalent to '+list_to_poly(B_i))
     print('In HEX, : '+hex_to_alpha[list_to_hex_number(reverse_list(B_i)[:4])]+hex_to_alpha[list_to_hex_number(reverse_list(B_i)[4:])])
+    
+    
+    
+def multiply_four_element(arr1,arr2,view=True):
+    ret=[0 for _ in range(8)]
+    for c in range(4):
+        ele1 = hex_to_list(arr1[c])
+        ele2 = hex_to_list(arr2[c])
+        
+        temp = poly_calculator(ele1,ele2,view=False)
+        for t in range(8):
+            ret[t]+=temp[t]
+            ret[t]%=2
+    if view:
+        print(list_to_poly(reverse_list(ret)))
+    return ret
+    
+    
+    
+def mix_columns(input_list):
+    hex_to_alpha = '0123456789ABCDEF'
+    
+    large_list=[[],[],[],[]]
+ 
+    large_list[0].append('02')
+    large_list[0].append('03')
+    large_list[0].append('01')
+    large_list[0].append('01')
+    
+    large_list[1].append('01')
+    large_list[1].append('02')
+    large_list[1].append('03')
+    large_list[1].append('01')
+    
+    large_list[2].append('01')
+    large_list[2].append('01')
+    large_list[2].append('02')
+    large_list[2].append('03')
+    
+    large_list[3].append('03')
+    large_list[3].append('01')
+    large_list[3].append('01')
+    large_list[3].append('02')
+    
+    
+    ret_list=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    
+    save_list=[[],[],[],[]]
+    
+    for i in range(4):
+        for j in range(4):
+            select_col_j = [input_list[0][j],input_list[1][j],input_list[2][j],input_list[3][j]]
+            
+            temp = multiply_four_element(large_list[i],select_col_j,view=False)
+            ret_list[i][j]=temp
+            print(hex_to_alpha[list_to_hex_number(temp[:4])]+hex_to_alpha[list_to_hex_number(temp[4:])],end=" ")
+        print()
+            
+def inv_mix_columns(input_list):
+    hex_to_alpha = '0123456789ABCDEF'
+    
+    large_list=[[],[],[],[]]
+ 
+    large_list[0].append('0E')
+    large_list[0].append('0B')
+    large_list[0].append('0D')
+    large_list[0].append('09')
+    
+    large_list[1].append('09')
+    large_list[1].append('0E')
+    large_list[1].append('0B')
+    large_list[1].append('0D')
+    
+    large_list[2].append('0D')
+    large_list[2].append('09')
+    large_list[2].append('0E')
+    large_list[2].append('0B')
+    
+    large_list[3].append('0B')
+    large_list[3].append('0D')
+    large_list[3].append('09')
+    large_list[3].append('0E')
+    
+    
+    ret_list=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    
+    save_list=[[],[],[],[]]
+    
+    for i in range(4):
+        for j in range(4):
+            select_col_j = [input_list[0][j],input_list[1][j],input_list[2][j],input_list[3][j]]
+            
+            temp = multiply_four_element(large_list[i],select_col_j,view=False)
+            ret_list[i][j]=temp
+            print(hex_to_alpha[list_to_hex_number(temp[:4])]+hex_to_alpha[list_to_hex_number(temp[4:])],end=" ")
+        print()
+        
+        
+        
+import math
+def finding_p_q(n,pi_n):
+    p_plus_q=1+n-pi_n
+    print('p+q = '+str(p_plus_q))
+    
+    print('solve x^2 -'+str(p_plus_q)+'x +'+str(n)+' = 0')
+    print('b^2 = '+str(p_plus_q**2))
+    print('4ac = '+str(4*n))
+    print('b^2-4ac = '+str(p_plus_q**2-4*n))
+    print('sqrt(b^2-4ac) = '+str(math.sqrt(p_plus_q**2-4*n)))
+    
+    print()
+    print('x are :')
+    print((p_plus_q+int(math.sqrt(p_plus_q**2-4*n)))//2)
+    print((p_plus_q+int(math.sqrt(p_plus_q**2+4*n)))//2)
+    
